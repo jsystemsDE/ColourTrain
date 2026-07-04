@@ -11,6 +11,9 @@ interface TrainingPageProps {
 
 const DEFAULT_CONFIG: TrainingConfigData = {
   interval: '1000',
+  intervalMode: 'fixed',
+  randomMin: '1',
+  randomMax: '3',
   colors: ['#FF4A4A', '#00FFA3', '#FFD700', '#FFFFFF'],
   sounds: ['beep'],
 };
@@ -39,7 +42,10 @@ export default function TrainingPage({ params }: TrainingPageProps) {
           .single();
 
         if (data?.config_data) {
-          setConfig(data.config_data as TrainingConfigData);
+          setConfig({
+            ...DEFAULT_CONFIG,
+            ...(data.config_data as TrainingConfigData),
+          });
         }
       };
 
